@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+###Importing CDN for Google's MediaPipe Library
+Ensure these are added in the head tags.
+<img width="876" alt="Screen Shot 2021-07-26 at 1 18 28 PM" src="https://user-images.githubusercontent.com/55956972/127031395-5e1c8d2d-7a22-4989-bab6-3fb5bd7b5ed4.png">
+
+More information can be found here: https://google.github.io/mediapipe/getting_started/javascript
