@@ -1,0 +1,23 @@
+.button{
+    border: 1px solid rgb(98, 0, 209);
+    padding:1em;
+    border-radius: 5px;
+    text-decoration: none;
+    color:#000;
+    background-color: rgb(98, 0, 209);
+    color: #fff;
+    font-weight: 500;
+    margin:2em;
+}
+
+/*rgb(230, 135, 47)*/
+
+.button:hover{
+    background-color: #fff;
+    border-radius:1px solid rgb(98, 0, 209);
+    color:rgb(98, 0, 209);
+}
+
+.home-container{
+    text-align: center;
+}
