@@ -6,6 +6,9 @@ import {Hands} from '@mediapipe/hands';
 import * as cam from '@mediapipe/camera_utils';
 import {useRef, useEffect, useState} from 'react';
 
+const startTime = Date.now();
+const LandMarkData = [];
+
 function HandTracker(){
   const webCamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -17,27 +20,25 @@ function HandTracker(){
 const objectToCSVRow = (dataObject) => {
   let dataArray = [];
   for (let o in dataObject) {
-      let innerValue = dataObject[o]===null?'':dataObject[o].toString();
-      let result = innerValue.replace(/"/g, '""');
-      result = '"' + result + '"';
+      let innerValue = dataObject[o]===null?'':dataObject[o];
+      let result = innerValue.replace(/"/g, ' ');
+      result = ' ' + result + ' ';
       dataArray.push(result);
   }
   return dataArray.join(' ') + '\r\n';
 }
 
-
-
-  const downloadCSV = (arrayOfObjects) =>{
+  const downloadCSV = (arrayOfObjects=[]) =>{
     if (!arrayOfObjects.length) {
-      return;
+      return alert('No data available for download.');
   }
-  var csvContent = "data:text/csv;charset=utf-8,";
+  let csvContent = "data:text/csv;charset=utf-8,";
   csvContent += objectToCSVRow(Object.keys(arrayOfObjects[0]));
   arrayOfObjects.forEach(function(item){
       csvContent += objectToCSVRow(item);
   }); 
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "landmarkData.csv");
     document.body.appendChild(link); // Required for FF
@@ -46,20 +47,20 @@ const objectToCSVRow = (dataObject) => {
   }
 
   const jsonToCSV = (objArr) =>{
-    const LandMarkData = [];
     for(let i=0; i<21; i++){
+      const endTime = Date.now();
+      const deltaTime = endTime - startTime;
       const data=[];
       const key = i;
       const xVal = objArr.multiHandLandmarks[0][i].x;
       const yVal = objArr.multiHandLandmarks[0][i].y;
       const zVal = objArr.multiHandLandmarks[0][i].z;
-      data.push(key, xVal, yVal, zVal);
+      data.push(key, `${deltaTime}`, xVal.toFixed(4), yVal.toFixed(4), zVal.toFixed(4));
       LandMarkData.push(data);
-      
     }
     console.log(LandMarkData);
-    //downloadCSV(LandMarkData);
   }
+
 
   const onResults = (results)=>{
     if(results.multiHandLandmarks){
@@ -72,8 +73,6 @@ const objectToCSVRow = (dataObject) => {
       setDigit_z(z);
 
       jsonToCSV(results);
-      console.log(results);
-
     }
   }
   
@@ -99,8 +98,13 @@ const objectToCSVRow = (dataObject) => {
       }
       });
       camera.start();
+      
     }
   }, []);
+
+  function eventHandler(){
+    downloadCSV(LandMarkData);
+  }
 
   return(
     <div className="container-hand-tracker">
@@ -130,6 +134,7 @@ const objectToCSVRow = (dataObject) => {
         <p>X: {digit_x}</p>
         <p>Y: {digit_y}</p>
         <p>Z: {digit_z}</p>
+        <button className="button-csv" onClick={eventHandler}>Download CSV</button>
       </div>
 
       <div>

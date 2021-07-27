@@ -5,3 +5,22 @@
 .container-data{
   margin-top: 25%;
 }
+
+.button-csv{
+  border: 1px solid rgb(98, 0, 209);
+  padding:1em;
+  border-radius: 5px;
+  text-decoration: none;
+  color:#000;
+  background-color: rgb(98, 0, 209);
+  color: #fff;
+  font-weight: 600;
+  margin:2em;
+}
+
+.button-csv:hover{
+  background-color: #fff;
+  border-radius:1px solid rgb(98, 0, 209);
+  color:rgb(98, 0, 209);
+  cursor: pointer;
+}
