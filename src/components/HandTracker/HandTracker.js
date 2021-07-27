@@ -20,9 +20,9 @@ function HandTracker(){
 const objectToCSVRow = (dataObject) => {
   let dataArray = [];
   for (let o in dataObject) {
-      let innerValue = dataObject[o]===null?'':dataObject[o];
+      let innerValue = dataObject[o]===null?'':dataObject[o].toString();
       let result = innerValue.replace(/"/g, ' ');
-      result = ' ' + result + ' ';
+      result = ' ' + result + ', ';
       dataArray.push(result);
   }
   return dataArray.join(' ') + '\r\n';
