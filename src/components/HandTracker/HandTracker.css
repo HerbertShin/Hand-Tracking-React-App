@@ -3,7 +3,7 @@
 }
 
 .container-data{
-  margin-top: 25%;
+  margin-top: 23em;
 }
 
 .button-csv{
@@ -11,10 +11,9 @@
   padding:1em;
   border-radius: 5px;
   text-decoration: none;
-  color:#000;
   background-color: rgb(98, 0, 209);
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
   margin:2em;
 }
 

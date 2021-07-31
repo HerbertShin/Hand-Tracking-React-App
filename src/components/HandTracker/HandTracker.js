@@ -20,7 +20,7 @@ function HandTracker(){
 const objectToCSVRow = (dataObject) => {
   let dataArray = [];
   for (let o in dataObject) {
-      let innerValue = dataObject[o]===null?'':dataObject[o].toString();
+      let innerValue = dataObject[o]===null? '' : dataObject[o].toString();
       let result = innerValue.replace(/"/g, ' ');
       result = ' ' + result + ', ';
       dataArray.push(result);
@@ -41,21 +41,21 @@ const objectToCSVRow = (dataObject) => {
     let link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "landmarkData.csv");
-    document.body.appendChild(link); // Required for FF
+    document.body.appendChild(link); 
     link.click();
     document.body.removeChild(link);
   }
 
   const jsonToCSV = (objArr) =>{
+    const data=[];
+    const endTime = Date.now();
+    const deltaTime = endTime - startTime;
+    data.push(deltaTime);
     for(let i=0; i<21; i++){
-      const endTime = Date.now();
-      const deltaTime = endTime - startTime;
-      const data=[];
-      const key = i;
       const xVal = objArr.multiHandLandmarks[0][i].x;
       const yVal = objArr.multiHandLandmarks[0][i].y;
       const zVal = objArr.multiHandLandmarks[0][i].z;
-      data.push(key, `${deltaTime}`, xVal.toFixed(4), yVal.toFixed(4), zVal.toFixed(4));
+      data.push(xVal.toFixed(6), yVal.toFixed(6), zVal.toFixed(6));
       LandMarkData.push(data);
     }
     console.log(LandMarkData);
@@ -135,6 +135,7 @@ const objectToCSVRow = (dataObject) => {
         <p>Y: {digit_y}</p>
         <p>Z: {digit_z}</p>
         <button className="button-csv" onClick={eventHandler}>Download CSV</button>
+        <p>{LandMarkData}</p>
       </div>
 
       <div>
