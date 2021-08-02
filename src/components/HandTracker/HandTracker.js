@@ -46,7 +46,7 @@ const objectToCSVRow = (dataObject) => {
     document.body.removeChild(link);
   }
 
-  const jsonToCSV = (objArr) =>{
+  const collectData = (objArr) =>{
     const data=[];
     const endTime = Date.now();
     const deltaTime = endTime - startTime;
@@ -61,6 +61,11 @@ const objectToCSVRow = (dataObject) => {
     console.log(LandMarkData);
   }
 
+  const countData = (array) =>{
+    const size = array.length;
+    return size;
+  };
+
 
   const onResults = (results)=>{
     if(results.multiHandLandmarks){
@@ -72,7 +77,7 @@ const objectToCSVRow = (dataObject) => {
       setDigit_y(y);
       setDigit_z(z);
 
-      jsonToCSV(results);
+      collectData(results);
     }
   }
   
@@ -134,8 +139,8 @@ const objectToCSVRow = (dataObject) => {
         <p>X: {digit_x}</p>
         <p>Y: {digit_y}</p>
         <p>Z: {digit_z}</p>
+        <p>Number of datasets recorded: {countData(LandMarkData)}</p>
         <button className="button-csv" onClick={eventHandler}>Download CSV</button>
-        <p>{LandMarkData}</p>
       </div>
 
       <div>
