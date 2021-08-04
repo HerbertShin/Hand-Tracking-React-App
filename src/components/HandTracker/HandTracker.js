@@ -33,8 +33,7 @@ const objectToCSVRow = (dataObject) => {
       return alert('No data available for download.');
   }
   let csvContent = "data:text/csv;charset=utf-8,";
-  csvContent += objectToCSVRow(Object.keys(arrayOfObjects[0]));
-  arrayOfObjects.forEach(function(item){
+  arrayOfObjects.forEach((item)=>{
       csvContent += objectToCSVRow(item);
   }); 
     let encodedUri = encodeURI(csvContent);
@@ -48,16 +47,21 @@ const objectToCSVRow = (dataObject) => {
 
   const collectData = (objArr) =>{
     const data=[];
+    //Determines the time stamp of each dataset 
     const endTime = Date.now();
     const deltaTime = endTime - startTime;
     data.push(deltaTime);
+    //Iterate through the array of landmarks which contain 21 distinct sets of points
     for(let i=0; i<21; i++){
+      //Retrieve the x, y, z points of each landmark 
       const xVal = objArr.multiHandLandmarks[0][i].x;
       const yVal = objArr.multiHandLandmarks[0][i].y;
       const zVal = objArr.multiHandLandmarks[0][i].z;
+      //Push the points to an array reducing to 6 decimal points 
       data.push(xVal.toFixed(6), yVal.toFixed(6), zVal.toFixed(6));
-      LandMarkData.push(data);
     }
+    //Push the set of data into a static array 
+    LandMarkData.push(data);
     console.log(LandMarkData);
   }
 
