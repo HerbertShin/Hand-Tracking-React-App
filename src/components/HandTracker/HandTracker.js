@@ -2,9 +2,10 @@ import React from 'react';
 import './HandTracker.css';
 import Webcam from 'react-webcam';
 import {Hands} from '@mediapipe/hands'; 
-//import * as hands from '@mediapipe/hands';
+import * as hands from '@mediapipe/hands';
 import * as cam from '@mediapipe/camera_utils';
 import {useRef, useEffect, useState} from 'react';
+import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 
 const startTime = Date.now();
 const LandMarkData = [];
@@ -16,7 +17,7 @@ function HandTracker(){
   const [digit_y, setDigit_y] = useState(0);
   const [digit_z, setDigit_z] = useState(0);
   let camera = null;  
-
+  
 const objectToCSVRow = (dataObject) => {
   let dataArray = [];
   for (let o in dataObject) {
@@ -72,7 +73,34 @@ const objectToCSVRow = (dataObject) => {
 
 
   const onResults = (results)=>{
+    const videoWidth = webCamRef.current.video.videoWidth;
+    const videoHeight = webCamRef.current.video.videoHeight;
+
+    //Sets height and width of canvas 
+    canvasRef.current.width = videoWidth;
+    canvasRef.current.height = videoHeight;
+
+    const canvasElement =  canvasRef.current;
+    const canvasCtx = canvasElement.getContext("2d");
+
+    canvasCtx.save();
+    canvasCtx.clearRect(0,0,canvasElement.width,canvasElement.height);
+    canvasCtx.drawImage(
+      results.image,
+      0,
+      0,
+      canvasElement.width,
+      canvasElement.height
+    );
+
     if(results.multiHandLandmarks){
+      
+      for(const landmarks of results.multiHandLandmarks) {
+        drawConnectors(canvasCtx, landmarks, hands.HAND_CONNECTIONS,
+          {color: "#00FF00", lineWidth: 5});
+        drawLandmarks(canvasCtx, landmarks, {color: "#FF0000", lineWidth: 2});
+      
+      }
       const x = results.multiHandLandmarks[0][0].x;
       const y = results.multiHandLandmarks[0][0].y;
       const z = results.multiHandLandmarks[0][0].z;
@@ -83,6 +111,7 @@ const objectToCSVRow = (dataObject) => {
 
       collectData(results);
     }
+    canvasCtx.restore();
   }
   
   useEffect(()=>{
@@ -94,8 +123,8 @@ const objectToCSVRow = (dataObject) => {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5
+      minDetectionConfidence: 0.6,
+      minTrackingConfidence: 0.6
     });
 
     hands.onResults(onResults);
@@ -132,7 +161,19 @@ const objectToCSVRow = (dataObject) => {
     />
 
     <canvas 
-      ref={canvasRef} 
+      ref={canvasRef}
+      className="output_canvas"
+      style={{
+        position: "absolute",
+        marginLeft: "auto",
+        marginRight: "auto",
+        left: 0,
+        right: 0,
+        textAlign: "center",
+        zindex: 9,
+        width: 640,
+        height: 480,
+      }} 
       />
       
     </div>
