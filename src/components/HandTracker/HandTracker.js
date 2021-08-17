@@ -97,8 +97,8 @@ const objectToCSVRow = (dataObject) => {
       
       for(const landmarks of results.multiHandLandmarks) {
         drawConnectors(canvasCtx, landmarks, hands.HAND_CONNECTIONS,
-          {color: "#00FF00", lineWidth: 5});
-        drawLandmarks(canvasCtx, landmarks, {color: "#FF0000", lineWidth: 2});
+          {color: "#00FF00", lineWidth: 2});
+        drawLandmarks(canvasCtx, landmarks, {color: "#00ffd0", lineWidth: 1});//#5d0db8 purple
       
       }
       const x = results.multiHandLandmarks[0][0].x;
@@ -123,8 +123,8 @@ const objectToCSVRow = (dataObject) => {
 
     hands.setOptions({
       maxNumHands: 1,
-      minDetectionConfidence: 0.6,
-      minTrackingConfidence: 0.6
+      minDetectionConfidence: 0.75,
+      minTrackingConfidence: 0.7
     });
 
     hands.onResults(onResults);
