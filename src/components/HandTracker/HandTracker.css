@@ -1,3 +1,7 @@
+*{
+  font-family: "montseratt", sans-serif;
+}
+
 .container-hand-tracker{
   text-align: center;
 }
@@ -22,4 +26,16 @@
   border-radius:1px solid rgb(98, 0, 209);
   color:rgb(98, 0, 209);
   cursor: pointer;
+}
+
+.output-canvas{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: "center";
+  z-index: 9;
+  width: 640;
+  height: 480;
 }
