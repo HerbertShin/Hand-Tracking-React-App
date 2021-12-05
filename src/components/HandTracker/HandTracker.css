@@ -7,18 +7,19 @@
 }
 
 .container-data{
-  margin-top: 33em;
+  margin-top: 3em;
 }
 
 .button-csv{
   border: 1px solid rgb(98, 0, 209);
+  align-self: center;
   padding:1em;
   border-radius: 5px;
   text-decoration: none;
   background-color: rgb(98, 0, 209);
   color: #fff;
   font-weight: 500;
-  margin:2em;
+  width:20em;
 }
 
 .button-csv:hover{
@@ -35,7 +36,36 @@
   left: 0;
   right: 0;
   text-align: "center";
-  z-index: 9;
+  z-index: 109;
   width: 640;
   height: 480;
+  background-color: black;
 }
+
+.input-box{
+  width: 10em;
+  text-align: center;
+  margin:auto;
+  padding:0.2em;
+}
+
+.selection-label{
+  margin-bottom: 2em;
+}
+
+.utility-container{
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+For webcam component 
+      style={{
+        position: "absolute",
+        marginRight:"auto",
+        marginLeft:"auto",
+        left:0,
+        right:0,
+        textAlign:"center"
+      }} 
+*/
