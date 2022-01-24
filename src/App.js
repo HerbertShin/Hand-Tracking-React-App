@@ -1,5 +1,5 @@
-import HandTracker from './components/HandTracker/HandTracker';
-import Home from './components/Home/Home';
+import CameraView from './components/CameraView';
+import Home from './components/Home';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import React from 'react';
 import {
@@ -8,6 +8,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import AssessmentPage from './components/AssessmentPage';
 
 function App() {
   return (
@@ -19,8 +20,7 @@ function App() {
         </Route>
 
         <Route path='/hand-tracker'>
-          <HandTracker />
-          <Link className="button" to='/'>Home</Link>
+          <AssessmentPage />
         </Route>
 
         <Route path='/'>

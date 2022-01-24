@@ -2,14 +2,6 @@
   font-family: "montseratt", sans-serif;
 }
 
-.container-hand-tracker{
-  text-align: center;
-}
-
-.container-data{
-  margin-top: 3em;
-}
-
 .button-csv{
   border: 1px solid rgb(98, 0, 209);
   align-self: center;
@@ -30,16 +22,21 @@
 }
 
 .output-canvas{
-  position: absolute;
+  position:absolute;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
-  text-align: "center";
+  text-align: center;
   z-index: 109;
-  width: 640;
-  height: 480;
-  background-color: black;
+  width: 42vw;
+  height: 30vw;
+  
+}
+
+.webcam{
+  width: 42vw;
+  height: 30vw;
 }
 
 .input-box{

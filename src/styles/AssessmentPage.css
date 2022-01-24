@@ -1,0 +1,29 @@
+.assessment-container{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.ready-button{
+    width:fit-content;
+    text-align: center;
+    padding:1rem;
+    margin: auto;
+}
+
+.assessment-body{
+    
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.assessment-footer{
+    align-content:space-between ;
+}
+
+.assessment-button{
+    padding:1rem;
+    margin-top:1rem;
+    position:absolute;
+}
